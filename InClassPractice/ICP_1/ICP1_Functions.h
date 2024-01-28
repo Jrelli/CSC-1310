@@ -14,5 +14,6 @@ using namespace std;
 // Structure declaration
 
 // Function declaration
+int sumOfArray(int[], int);
 
 #endif
