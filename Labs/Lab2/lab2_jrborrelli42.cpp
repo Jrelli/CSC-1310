@@ -1,5 +1,5 @@
 /*
-	Title:  	Lab2.cpp
+	Title:  	lab2_jrborrelli42.cpp
 	Author: 	Joey Borrelli
 	Date:  		1/31/2024
 	Purpose:  	Demonstrate your knowledge of recursive functions and fortnite burger
@@ -117,6 +117,11 @@ int main()
 				
 				//print out whether the user's string is a palindrome or not here.
 				//when you print out the user's string, print out the uppercase version that doesn't have the spaces removed.
+				if(isPalindrome(userStrWithoutSpaces)){
+					cout << "\nYour string: " + userString + " is a palindrome!\n";
+				}else{
+					cout << "\nYour string: " + userString + " is NOT a palindrome!\n";
+				}
 				
 				break;
 				
@@ -170,13 +175,29 @@ void stringReverser(string given, int length){
 }
 
 bool isPalindrome(string given){
-	// if(){
-	// 	// check front and back
-	// 	// pass in the substring
-		
-	// }else{
-	// 	//recursive case
-	// }
+	// if our length is not greater than 0 then we either passed an empty string, which would be a palindrome, 
+	// or we have substringed all the way down to nothing which would happen if front kept evaluating equal to back, making it a palindrome
+	if(given.length() > 1){
+		//cout << endl << given.length();
+		// set fronts and back characters
+		char front = given[0];
+		char back = given[given.length() - 1];
+
+		// if equivalent we move our string in by one on each side and pass again, if false then we return false and stop recursion
+		if(front == back){
+			//cout << endl << given;
+			given = given.substr(1, given.length() - 2);
+			//cout << endl << given;
+			//cout << "\nrecursive case";
+			return(isPalindrome(given));
+		}else{
+			//cout << "\nfalse case";
+			return(false);
+		}
+	}else{
+		//cout << "\ntrue case";
+		return(true);
+	}
 }
 
 int multiply(int x, int y){
