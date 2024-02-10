@@ -11,7 +11,7 @@ using namespace std;
 
 // Constant declaration
 
-// Structure declaration
+// Structure/class declaration
 
 // Function declaration
 
