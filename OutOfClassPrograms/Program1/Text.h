@@ -7,7 +7,9 @@
 
 #ifndef TEXT_H
 #define TEXT_H
-using namespace std;
+
+#include <iostream>
+#include <cstring>
 
 class Text{
 	private:
@@ -20,7 +22,7 @@ class Text{
 					Then, copy the text sent as an argument to this constructor to the new dynamically allocated c-string.  
 					Then, set the textArray attribute to this newly created c-string.
 		*/
-		Text(char*);
+		Text(char* userStr);
 
 		/*
 		Purpose: release dynamically allocated memory for the c-string in the Text object 

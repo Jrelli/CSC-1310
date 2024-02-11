@@ -7,15 +7,12 @@
 
 #ifndef VIDEOGAME_H
 #define VIDEOGAME_H
-using namespace std;
+
 #include "Text.h"
 #include <fstream>
 
 class VideoGame{
 	private:
-		// title of the video game
-		Text* title;
-
 		// platforms that the video game is available on
 		Text* platform;
 
@@ -31,8 +28,11 @@ class VideoGame{
 		// 0-100 representing the user rating from IGDB
 		int userRating;
 	public:
+		// title of the video game
+		Text* title;
+
 		// Constructor
-		VideoGame(Text*, Text*, int, Text*, Text*, int);
+		VideoGame(Text* title, Text* platforms, int releaseYear, Text* genre, Text* ageRating, int userRating);
 		
 		/*
 		Purpose:  	This function is automatically called when a Video game object is destroyed.  
@@ -55,7 +55,7 @@ class VideoGame{
 					In order to print the Text objects to the file, you must first retrieve the c-string attribute (calling the getText function) 
 					from this Text, and then you can print it to the file.
 		*/
-		void printVideoGameDetailsToFile(ofstream&);
+		void printVideoGameDetailsToFile(std::ofstream&);
 		
 		// Getter
 		Text* getVideoGameTitle();

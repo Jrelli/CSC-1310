@@ -7,18 +7,22 @@
 
 #ifndef VIDEOGAMELIBRARY_H
 #define VIDEOGAMELIBRARY_H
-using namespace std;
+
+#include "VideoGame.h"
 
 class VideoGameLibrary{
 	private:
 		// videoGamesArray – a pointer to an array of pointers. Each pointer in the array should be able to point to (hold the memory address of) an individual Video game object.
-		// VideoGame**videoGameArray[];
+		VideoGame** videoGameArray;
 
 		// maxGames – this is the maximum number of video games the library can hold and is the size of the video gamesArray.
 		int maxGames;
 
 		// numGames – this is the current number of video games actually pointed to in the videoGamesArray.
 		int numGames;
+
+		// used for taking in c strings
+		const int MAX_LINE_SIZE = 10000;
 	public:
 		
 
@@ -31,7 +35,7 @@ class VideoGameLibrary{
 		Purpose: This function is automatically called when a VideoGameLibrary object is created and it creates a library of video games.
 		Specifications: The function will dynamically allocate an array of pointers to VideoGame objects based on the maximum size and will also set the current number of video games to zero.
 		*/
-		VideoGameLibrary(int);
+		VideoGameLibrary(int maxSize);
 		
 		/*
 		Function name: ~VideoGameLibrary destructor
@@ -75,7 +79,7 @@ class VideoGameLibrary{
 		Specifications: This function will use a loop to read the contents of the file until reaching the end of file. For each video game, it will read the title in with a c-string and then dynamically allocate a Text to hold the title. Then it will read in the video game platforms with a c-string and then dynamically allocate a Text to hold the platform. Then it will read in the video game year. Then it will read in the video game genre with a c-string and then dynamically allocate a Text to hold the genre. Then it will read in the video game age rating with a c-string and then dynamically allocate a Text to hold the rating. Then it will read in the user rating (between 0 & 100). Then, it will dynamically create a new VideoGame object, sending the video game data just acquired from the user as arguments to the Video game constructor. Then, this function should check to see if numGames is equal to maxGames. If it is equal, then call the resizeVideoGameArray function. Then, it should assign this new video game to the correct pointer in the video gamesArray. Then, it should increment numGames. Then, it should print the title of the video game and say “ was added to the video game library!” This should happen for each video game read from the file. At the end of the function, it should print out how many video games were read from the file & added to the library.
 		[Note: The temporary c-string used to load in data should be able to hold a very large string – 10000 characters]
 		*/ 
-		void loadVideoGamesFromFile(char*);
+		void loadVideoGamesFromFile(char* fileName);
 
 		/*
 		Function name: removeVideoGameFromArray
@@ -93,7 +97,7 @@ class VideoGameLibrary{
 		Purpose: This function should be called when the user wants to print all the video game data from the video game library to a file. The data is printed in the following order (one piece of data per line): title, platform, year, genre, age rating, IGDB user rating.
 		Specifications: Open the file with the filename that was sent to this function. Then, use a loop to go through the video gameArray and call the Video game’s printVideoGameDetailsToFile function, sending the file stream object to be printed to. Then, close the file and print a confirmation that all video games have been printed to the filename.
 		*/
-		void saveToFile(char*);
+		void saveToFile(char* fileName);
 };
 
 #endif

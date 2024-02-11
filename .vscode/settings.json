@@ -50,5 +50,10 @@
         "typeinfo": "cpp",
         "fstream": "cpp",
         "cstring": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "IGDB",
+        "VIDEOGAME",
+        "VIDEOGAMELIBRARY"
+    ]
 }

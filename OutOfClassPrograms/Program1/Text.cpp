@@ -6,8 +6,6 @@
 */
 
 #include "Text.h"
-#include <iostream>
-#include <cstring>
 
 const char* textArray;
 int textLength; // num characters stored in textArray
@@ -18,9 +16,9 @@ Specifications: dynamically allocate a new character string the size of the stri
             Then, copy the text sent as an argument to this constructor to the new dynamically allocated c-string.  
             Then, set the textArray attribute to this newly created c-string.
 */
-Text::Text(char* str){
-    char* myCharArray = new char[strlen(str) + 1];
-    strcpy(myCharArray, str);
+Text::Text(char* userStr){
+    char* myCharArray = new char[strlen(userStr) + 1];
+    strcpy(myCharArray, userStr);
     textArray = myCharArray;
 }
 
@@ -38,7 +36,7 @@ Text::~Text(){
 Purpose:  print the c-string (textArray) to the screen
 */
 void displayText(){
-    cin.ignore();
+    std::cin.ignore();
     for(int i = 0; i++; i < textLength){
         std::cout << textArray[i];
     }
