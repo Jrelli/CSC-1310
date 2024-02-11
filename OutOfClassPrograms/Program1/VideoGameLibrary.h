@@ -9,9 +9,8 @@
 #define VIDEOGAMELIBRARY_H
 using namespace std;
 
-// Structure/class declaration
 class VideoGameLibrary{
-	public:
+	private:
 		// videoGamesArray – a pointer to an array of pointers. Each pointer in the array should be able to point to (hold the memory address of) an individual Video game object.
 		// VideoGame**videoGameArray[];
 
@@ -20,6 +19,8 @@ class VideoGameLibrary{
 
 		// numGames – this is the current number of video games actually pointed to in the videoGamesArray.
 		int numGames;
+	public:
+		
 
 		//Purpose: This function is called by addVideoGameToArray when the array size is not big enough to hold a new video game that needs to be added. The function makes the array twice as big as it currently is and then moves all the video game pointers to this new array.
 		void resizeVideoGameArray();
@@ -65,6 +66,7 @@ class VideoGameLibrary{
 		Specifications: This function should loop through the video gamesArray, retrieve the Video game’s title by calling the Video game’s getVideoGameTitle function, and then printing out the title by calling the Text’s displayText function.
 		*/
 		void displayVideoGameTitles();
+
 		/*
 		Function name: loadVideoGamesFromFile
 		Parameters: A pointer to a character (c-string or string literal argument) containing the filename
@@ -72,20 +74,26 @@ class VideoGameLibrary{
 		Purpose: This function should be called when the user wants to read video game data from a file and add the video games to the video game library. The file must have data in the following order: title, platform, year, genre, age rating, IGDB user rating.
 		Specifications: This function will use a loop to read the contents of the file until reaching the end of file. For each video game, it will read the title in with a c-string and then dynamically allocate a Text to hold the title. Then it will read in the video game platforms with a c-string and then dynamically allocate a Text to hold the platform. Then it will read in the video game year. Then it will read in the video game genre with a c-string and then dynamically allocate a Text to hold the genre. Then it will read in the video game age rating with a c-string and then dynamically allocate a Text to hold the rating. Then it will read in the user rating (between 0 & 100). Then, it will dynamically create a new VideoGame object, sending the video game data just acquired from the user as arguments to the Video game constructor. Then, this function should check to see if numGames is equal to maxGames. If it is equal, then call the resizeVideoGameArray function. Then, it should assign this new video game to the correct pointer in the video gamesArray. Then, it should increment numGames. Then, it should print the title of the video game and say “ was added to the video game library!” This should happen for each video game read from the file. At the end of the function, it should print out how many video games were read from the file & added to the library.
 		[Note: The temporary c-string used to load in data should be able to hold a very large string – 10000 characters]
+		*/ 
+		void loadVideoGamesFromFile(char*);
 
+		/*
 		Function name: removeVideoGameFromArray
 		Parameters: none
 		Returns: none (void)
 		Purpose: This function should be called when the user wants to remove one single video game from the video game library. The video game to be removed must is identified by the user and then removed.
 		Specifications: This function should first make sure that the number of video games is at least 1. if not, it should print that there must always be one video game in the library and the function should end. Then, the function should call the displayVideoGameTitles function to print all the video game titles. Then, ask the user to choose a video game to remove between 1 & numGames. Once the user identifies the video game, your program should print that the video game title has been successfully deleted. Then, release the dynamically allocated space for this video game and move all array elements in video gameArray back 1 starting with this deleted video game’s element. Last, decrement numGames.
+		*/
+		void removeVideoGameFromArray();
 		
+		/*
 		Function name: saveToFile
 		Parameters: A pointer to a character (c-string or string literal argument) containing the filename
 		Returns: none (void)
 		Purpose: This function should be called when the user wants to print all the video game data from the video game library to a file. The data is printed in the following order (one piece of data per line): title, platform, year, genre, age rating, IGDB user rating.
 		Specifications: Open the file with the filename that was sent to this function. Then, use a loop to go through the video gameArray and call the Video game’s printVideoGameDetailsToFile function, sending the file stream object to be printed to. Then, close the file and print a confirmation that all video games have been printed to the filename.
 		*/
-	private:
+		void saveToFile(char*);
 };
 
 #endif
