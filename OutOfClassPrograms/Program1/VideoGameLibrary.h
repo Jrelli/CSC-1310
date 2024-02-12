@@ -16,10 +16,10 @@ class VideoGameLibrary{
 		VideoGame** videoGameArray;
 
 		// maxGames – this is the maximum number of video games the library can hold and is the size of the video gamesArray.
-		int maxGames;
+		int maxGamesInLibrary;
 
 		// numGames – this is the current number of video games actually pointed to in the videoGamesArray.
-		int numGames;
+		int numGamesInLibrary;
 
 		// used for taking in c strings
 		const int MAX_LINE_SIZE = 10000;

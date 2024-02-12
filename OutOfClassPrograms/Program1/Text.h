@@ -13,9 +13,11 @@
 
 class Text{
 	private:
-		const char* textArray;
+		char* textArray;
+		
 		int textLength; // num characters stored in textArray
 	public:
+		
 		/*
  		Purpose:  	called automatically when Text object is created, dynamically allocates a character array which contains the character array passed to the function.
 		Specifications: dynamically allocate a new character string the size of the string passed to this function plus one (for the null terminator).  

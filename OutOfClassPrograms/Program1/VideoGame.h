@@ -13,23 +13,16 @@
 
 class VideoGame{
 	private:
-		// platforms that the video game is available on
-		Text* platform;
+		// m_title: title of the video game, 
+		// platform: platforms that the video game is available on, 
+		// m_genre: genre of the video game, 
+		// m_ageRating: age rating of the video game
+		Text* m_title, *m_platform, *m_genre, *m_ageRating; 
 
-		// year the video game was released
-		int year;
-
-		// genre of the video game
-		Text* genre;
-
-		// age rating of the video game
-		Text* ageRating;
-
-		// 0-100 representing the user rating from IGDB
-		int userRating;
+		// m_userRating: 0-100 representing the user rating from IGDB, 
+		// year: year the video game was released
+		int m_userRating, m_year; 
 	public:
-		// title of the video game
-		Text* title;
 
 		// Constructor
 		VideoGame(Text* title, Text* platforms, int releaseYear, Text* genre, Text* ageRating, int userRating);

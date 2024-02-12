@@ -7,16 +7,6 @@
 
 #include "VideoGame.h"
 
-// m_title: title of the video game, 
-// platform: platforms that the video game is available on, 
-// m_genre: genre of the video game, 
-// m_ageRating: age rating of the video game
-Text* m_title, *m_platform, *m_genre, *m_ageRating; 
-
-// m_userRating: 0-100 representing the user rating from IGDB, 
-// year: year the video game was released
-int m_userRating, m_year; 
-
 // CONSTRUCTOR
 VideoGame::VideoGame(Text* title, Text* platforms, int releaseYear, Text* genre, Text* ageRating, int userRating){
     m_title = title;
@@ -32,8 +22,11 @@ This function is automatically called when a Video game object is destroyed.  Th
 */
 VideoGame::~VideoGame(){
     // Release the dynamically allocated space for the video gameTitle, platform, genre, and age rating.
-    delete m_title, m_platform, m_genre, m_ageRating;
-    std::cout << "VideoGame destructor: Released memory for title, platform, genre, & age rating.\n";
+    delete m_title;
+    delete m_platform;
+    delete m_genre;
+    delete m_ageRating;
+    std::cout << "\nVideoGame destructor: Released memory for title, platform, genre, & age rating.\n";
 }
 
 /*
@@ -41,14 +34,17 @@ Purpose:  	This function should be called when the user wants to print ALL the v
 Specifications: Print the title, year, genre, rating & number of stars.  Remember that in order to print the Text objects, 
             you must call their displayText function.
 */
-void printVideoGameDetails(){
-    std::cout << "VIDEO GAME DETAILS:",
-    "\n_______________________________________________________",
-    "Title: "; m_title->displayText(); std::cout << std::endl << // UNDEFINED REFERENCE
-    "Year Released: " << m_year << "\n",
-    "Genre: "; m_genre->displayText(); std::cout << "\n", // UNDEFINED REFERENCE
-    "Age Rating: "; m_ageRating->displayText(); std::cout << std::endl << // UNDEFINED REFERENCE
-    "IGDB Rating: " << m_userRating << "\n";
+void VideoGame::printVideoGameDetails(){
+    std::cout << "Title: "; 
+    m_title->displayText(); 
+    std::cout << "\nPlatform: ";
+    m_platform->displayText();
+    std::cout << "\nYear Released: " << m_year;
+    std::cout << "\nGenre: "; 
+    m_genre->displayText(); 
+    std::cout << "\nAge Rating: "; 
+    m_ageRating->displayText(); 
+    std::cout << "\nIGDB Rating: " << m_userRating << "\n";
 }
 
 /*
@@ -57,17 +53,20 @@ Specifications: Print the title, year, genre, rating & user rating to the file s
             In order to print the Text objects to the file, you must first retrieve the c-string attribute (calling the getText function) 
             from this Text, and then you can print it to the file.
 */
-void printVideoGameDetailsToFile(std::ofstream& file){
-    file << "\nVIDEO GAME DETAILS:", "\n_______________________________________________________", 
-    "Title: ", m_title->getText(), "\n", // UNDEFINED REFERENCE
-    "Year Released: ", m_year, "\n",
-    "Genre: ", m_genre->getText(), "\n", // UNDEFINED REFERENCE
-    "Age Rating: ", m_ageRating->getText(), "\n"; // UNDEFINED REFERENCE
-    file << "IGDB Rating: " << m_userRating << "\n";
-    // NOTE: VScode freaks out if I add another comma, so I just did file << again.
+void VideoGame::printVideoGameDetailsToFile(std::ofstream& file){
+    file << "Title: "; 
+    file << m_title->getText(); 
+    file << "\nPlatform: ";
+    file << m_platform->getText();
+    file << "\nYear Released: " << m_year;
+    file << "\nGenre: "; 
+    file << m_genre->getText(); 
+    file << "\nAge Rating: "; 
+    file << m_ageRating->getText(); 
+    file << "\nIGDB Rating: " << m_userRating << "\n";
 }
 
 // Getter
-Text* getVideoGameTitle(){
+Text* VideoGame::getVideoGameTitle(){
     return(m_title);
 }

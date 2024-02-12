@@ -8,15 +8,6 @@
 
 #include "VideoGameLibrary.h"
 
-// A pointer to an array of pointers. Each pointer in the array should be able to point to (hold the memory address of) an individual Video game object.
-VideoGame** videoGameArray;
-
-// This is the maximum number of video games the library can hold and is the size of the video gamesArray.
-int maxGamesInLibrary;
-
-// This is the current number of video games actually pointed to in the videoGamesArray.
-int numGamesInLibrary;
-
 /*
 CONSTRUCTOR
 This function is automatically called when a VideoGameLibrary object is created and it creates a library of video games.
@@ -25,7 +16,7 @@ VideoGameLibrary::VideoGameLibrary(int maxSize){
     maxGamesInLibrary = maxSize;
     
     // The function will dynamically allocate an array of pointers to VideoGame objects based on the maximum size 
-    videoGameArray = new VideoGame*[maxGames];
+    videoGameArray = new VideoGame*[maxGamesInLibrary];
     
     // and will also set the current number of video games to zero.
     numGamesInLibrary = 0;
@@ -36,9 +27,11 @@ DESTRUCTOR
 This function is automatically called when the VideoGame object is destroyed. This releases the dynamically created individual video games and then deletes the array.
 */
 VideoGameLibrary::~VideoGameLibrary(){
-    for(int i = 0; i < maxGames; i++){
+    //std::cout << "VideoGameLibrary destructor: Released memory for each game in the video game array and the array itself.\n";
+    for(int i = 0; i < maxGamesInLibrary - 1; i++){
         delete videoGameArray[i];
     }
+
     delete videoGameArray;
     std::cout << "VideoGameLibrary destructor: Released memory for each game in the video game array and the array itself.\n";
 }
@@ -49,9 +42,9 @@ be added. The function makes the array twice as big as it currently is and then 
 */
 void VideoGameLibrary::resizeVideoGameArray(){
     VideoGame** oldArray = videoGameArray;
-    maxGames = maxGames * 2;
-    videoGameArray = new VideoGame*[maxGames];
-    for(int i = 0; i < maxGames/2; i++){
+    maxGamesInLibrary = maxGamesInLibrary * 2;
+    videoGameArray = new VideoGame*[maxGamesInLibrary];
+    for(int i = 0; i < maxGamesInLibrary/2; i++){
         videoGameArray[i] = oldArray[i];
     }
 }
@@ -63,7 +56,8 @@ void VideoGameLibrary::addVideoGameToArray(){
     int year, rating;
 
     // It should ask the user for the video game title (read in as c-string, then dynamically create a Text object), 
-    std::cout << "\n\nEnter video game title: ";
+    std::cout << "\nEnter video game title: ";
+    std::cin.ignore();
     std::cin.getline(tempTitle, MAX_LINE_SIZE);
     Text* title = new Text(tempTitle);
 
@@ -74,33 +68,31 @@ void VideoGameLibrary::addVideoGameToArray(){
 
     // video game year (integer),
     std::cout << "\nEnter year: ";
-    std::cin.ignore();
     std::cin >> year;
-    std::cin.ignore();
 
     // video game genre (read in as c-string, then dynamically create a Text object),
-    std::cout << "\n\nEnter video game genre: ";
+    std::cout << "\nEnter video game genre: ";
+    std::cin.ignore();
     std::cin.getline(tempGenre, MAX_LINE_SIZE);
     Text* genre = new Text(tempGenre);
 
     // video game age rating (read in as c-string, then dynamically create a Text object), 
-    std::cout << "\n\nEnter video game age rating: ";
+    std::cout << "\nEnter video game age rating: ";
+    std::cin.ignore();
     std::cin.getline(tempAgeRating, MAX_LINE_SIZE);
     Text* ageRating = new Text(tempAgeRating);
 
     // and IGDB user rating (between 0 and 100).
     do{
         std::cout << "\nEnter IGDB rating: ";
-        std::cin.ignore();
         std::cin >> rating;
-        std::cin.ignore();
     }while(rating > 100 || rating < 0);
     
     // Then it should dynamically allocate a new VideoGame object, sending the video game data just acquired from the user as arguments to the VideoGame constructor.
     VideoGame* myVideoGame = new VideoGame(title, platform, year, genre, ageRating, rating);
 
     // Then, this function should check to see if numGamesInLibrary is equal to maxGames. If it is equal, then call the resizeVideoGameArray function. 
-    if(numGamesInLibrary == maxGames){
+    if(numGamesInLibrary == maxGamesInLibrary){
         resizeVideoGameArray();
     }
 
@@ -115,7 +107,8 @@ void VideoGameLibrary::addVideoGameToArray(){
 void VideoGameLibrary::displayVideoGames(){
     // loops through the video gamesArray and calls each Video game’s printVideoGameDetails function.
     for(int i = 0; i < numGamesInLibrary; i++){
-        videoGameArray[i]->printVideoGameDetails(); // UNDEFINED REFERENCE
+        std::cout << "\n----------Video Game " << i + 1 << "----------\n";
+        videoGameArray[i]->printVideoGameDetails();
     }
 }
 
@@ -127,7 +120,8 @@ void VideoGameLibrary::displayVideoGameTitles(){
     // loop through the videoGameArray
     for(int i = 0; i < numGamesInLibrary; i++){
         // retrieve the Video game’s title by calling the Video game’s getVideoGameTitle function, and then printing out the title by calling the Text’s displayText function.
-        videoGameArray[i]->getVideoGameTitle()->displayText(); // TWO UNDEFINED REFERENCES
+        std::cout << "\nVideo Game " << i + 1 << ": ";
+        videoGameArray[i]->getVideoGameTitle()->displayText();
     }
 }
 
@@ -139,7 +133,7 @@ void VideoGameLibrary::loadVideoGamesFromFile(char* fileName){
     // open file
     std::ifstream myFile(fileName);
     if(!myFile.is_open()){
-        std::cout << "\n\nFILE FAILED TO OPEN\n\n";
+        std::cout << "\nFILE FAILED TO OPEN\n";
         return;
     }
 
@@ -193,10 +187,10 @@ void VideoGameLibrary::loadVideoGamesFromFile(char* fileName){
         gamesAdded++;
 
         // Then, it should print the title of the video game and say “ was added to the video game library!” 
-        std::cout << title->getText() << " was added to the video game library!" << std::endl; // UNDEFINED REFERENCE
+        std::cout << title->getText() << " was added to the video game library!" << std::endl;
     }
     // At the end of the function, it should print out how many video games were read from the file & added to the library.
-    std::cout << std::endl << gamesAdded << " video games were read from the file and added to the library.\n";
+    std::cout << gamesAdded << " video games were read from the file and added to the library.\n";
 }
 
 /*
@@ -207,17 +201,19 @@ void VideoGameLibrary::removeVideoGameFromArray(){
     // This function should first make sure that the number of video games is at least 1.
     if(numGamesInLibrary > 0){
         // the function should call the displayVideoGameTitles function to print all the video game titles.
-        displayVideoGames();
+        displayVideoGameTitles();
         
         // game which user will select to remove
         int selectedGame;
 
         // Then, ask the user to choose a video game to remove between 1 & numGamesInLibrary.
-        std::cout << "Choose a video game to remove between 1 and " << numGamesInLibrary << ": ";
+        std::cout << "\nChoose a video game to remove between 1 and " << numGamesInLibrary << ": ";
         std::cin >> selectedGame;
 
         // Once the user identifies the video game, your program should print that the video game title has been successfully deleted.
-        std::cout << "\nVideo game title has been successfully removed.\n";
+        std::cout << "\nVideo game \"";
+        videoGameArray[selectedGame - 1]->getVideoGameTitle()->displayText(); 
+        std::cout <<"\" has been successfully removed.";
 
         // Then, release the dynamically allocated space for this video game 
         delete videoGameArray[selectedGame - 1];
@@ -250,8 +246,10 @@ void  VideoGameLibrary::saveToFile(char* fileName){
 
     // Then, use a loop to go through the video gameArray and 
     for(int i = 0; i < numGamesInLibrary; i++){
+        myFile << "----------Video Game " << i + 1 << "----------\n";
         // call the Video game’s printVideoGameDetailsToFile function, sending the file stream object to be printed to.
-        videoGameArray[i]->printVideoGameDetailsToFile(myFile); // UNDEFINED REFERENCE
+        videoGameArray[i]->printVideoGameDetailsToFile(myFile);
+        myFile << std::endl;
     }
     
     // Then, close the file

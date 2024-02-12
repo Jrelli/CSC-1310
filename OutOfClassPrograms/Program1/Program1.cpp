@@ -20,20 +20,14 @@ int main (){
     VideoGameLibrary* theVideoGameLibrary = new VideoGameLibrary(numVideoGames);
     
     while(!endProgram){
-        std::cout << "\n\nWhat would you like to do?\n\n",
-            "1. Load video games from file.\n\n",
-            "2. Save video games to a file.\n\n",
-            "3. Add a video game.\n\n",
-            "4. Remove a video game.\n\n",
-            "5. Display all video games.\n\n",
-            "6. Remove ALL video games from this library end program.\n\n",
-            "CHOOSE 1-6: ";
+        std::cout << "\nWhat would you like to do?\n1. Load video games from file.\n2. Save video games to a file.\n3. Add a video game.\n4. Remove a video game.\n5. Display all video games.\n6. Remove ALL video games from this library end program.\nCHOOSE 1-6: ";
         std::cin >> userMenuInput;
         
         switch(userMenuInput){
             case 1:
                 // ask name of file
-                std::cout << "\n\nEnter file name: ";
+                std::cout << "\nEnter file name: ";
+                std::cin.ignore();
                 std::cin.getline(fileName, maxSizeOfCString);
 
                 // call the videoGameLibrary's loadVideoGamesFromFile function ARG: filename
@@ -41,7 +35,8 @@ int main (){
                 break;
             case 2:
                 // ask name of file
-                std::cout << "\n\nEnter file name: ";
+                std::cin.ignore();
+                std::cout << "\nEnter what you want to name the file: ";
                 std::cin.getline(fileName, maxSizeOfCString);
 
                 // call VideoGameLibrary's saveToFile function ARG: filename
@@ -65,7 +60,7 @@ int main (){
                 endProgram = true;
                 break;
             default/*out of bounds*/:
-                std::cout << "\nThat is not a valid choice.\n";
+                std::cout << "That is not a valid choice.\n";
                 break;
         }
     }
