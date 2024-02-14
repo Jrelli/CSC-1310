@@ -202,7 +202,7 @@ bool isPalindrome(string given){
 
 int multiply(int x, int y){
 	y -= 1;
-    if(y == 0){
+    if(y < 1){ // formerly y == 0
     // base case
         return(x);
     }else{
