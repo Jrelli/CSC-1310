@@ -137,7 +137,7 @@ void reverseBubbleSort(Song songArray[], int numOfSongs){
         // It compares adjacent elements and swaps them if they are out of order
         for(int idx = numOfSongs - 1; idx > numOfSongs - maxElement - 1; idx--){            
 			// Compare adjacent elements and swap if necessary
-            if(songArray[idx].getTitle() < songArray[idx - 1].getTitle()){
+            if(songArray[idx].getTitle() > songArray[idx - 1].getTitle()){
 				swapSong = songArray[idx]; // Store the current song in swapSong
                 songArray[idx] = songArray[idx - 1]; // Move the smaller song to the right
                 songArray[idx - 1] = swapSong; // Move the larger song to the left
