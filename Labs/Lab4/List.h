@@ -103,7 +103,7 @@ void List::insertNode(string value){
             traversingNodePtr = traversingNodePtr->next; 
         }
 
-        // if our if on line 78 isn't tripped, then we never return and bellow is executed
+        // if our if on line 88 isn't tripped, then we never return and bellow is executed
         // inserts newNode to the end
         tail->next = newNode;
         tail = newNode;
