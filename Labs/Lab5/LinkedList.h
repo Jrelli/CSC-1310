@@ -92,7 +92,7 @@ void LinkedList<T>::deleteNode(int pos){
 	// If the position sent to this function is zero
 	if(pos == 0){
 		cout << "-----DELETING the node with address: " << head << endl;
-		LinkedList* tempNode = head;
+		ListNode* tempNode = head;
 		head = tempNode->next;
 		// delete the head node
 		delete tempNode;
@@ -141,7 +141,9 @@ void LinkedList<T>::displayList() const{
 		int currentPos = 1;
 		while(traversingNodePtr){
 			cout << "-----Node " << currentPos << " with memory address " << traversingNodePtr << endl;
-			traversingNodePtr->
+			// traversingNodePtr->
+			// print out pickle 
+			// Pickle(cout, traversingNodePtr->nodeValue);
 
 			currentPos++;
 			// set traversingNode to next pointer
