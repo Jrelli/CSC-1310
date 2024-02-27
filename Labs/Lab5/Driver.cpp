@@ -83,6 +83,7 @@ int main()
 		list.displayList();
 	}
 	cout << "Press enter to continue!\n";
+	cin.ignore(); // had to add to get it to wait to let me press enter
 	cin.get();
 	cout << "\n\n----------------------------------------------------------------------------\n";
 	cout << "Have a lovely day!\n(Now the destructor for LinkedList class will be called)\n\n";

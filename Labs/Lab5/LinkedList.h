@@ -140,10 +140,10 @@ void LinkedList<T>::displayList() const{
 		ListNode* traversingNodePtr = head;
 		int currentPos = 1;
 		while(traversingNodePtr){
-			cout << "-----Node " << currentPos << " with memory address " << traversingNodePtr << endl;
-			// traversingNodePtr->
+			cout << "-----Node " << currentPos << " with memory address " << traversingNodePtr;
+			
 			// print out pickle 
-			// Pickle(cout, traversingNodePtr->nodeValue);
+			cout << traversingNodePtr->nodeValue << endl;
 
 			currentPos++;
 			// set traversingNode to next pointer
