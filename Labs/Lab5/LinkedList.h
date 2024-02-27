@@ -16,18 +16,16 @@ using namespace std;
 
 
 template <typename T>
-class LinkedList
-{
+class LinkedList{
 	private:
-		struct ListNode
-		{
+		struct ListNode{
 			//STRUCTURE MEMBERS NEED TO BE ADDED HERE
 			T nodeValue;
 			ListNode* next;
 
 			ListNode(T NV){
-				nodeValue = NV;
-				next = NULL;
+				this->nodeValue = NV;
+				this->next = NULL;
 			}
 		}; 
 
@@ -94,17 +92,18 @@ void LinkedList<T>::deleteNode(int pos){
 		cout << "-----DELETING the node with address: " << head << endl;
 		ListNode* tempNode = head;
 		head = tempNode->next;
-		// delete the head node
+		// delete the previous head node
 		delete tempNode;
+		return;
 	}else{ // Otherwise,   
 		ListNode* traversingNodePtr = head;
 		ListNode* prevNodePtr = head;
-		int currentPos = 1;
+		int currentPos = 0;
 		
 		// traverse the linked list to search for a node at the given position (if it exists)
 		while(traversingNodePtr){
 			// if the positions match
-			if(currentPos = pos){
+			if(currentPos == pos){
 				if(tail == traversingNodePtr){ // if our matched value is the last value
 					cout << "-----DELETING the node with address: " << traversingNodePtr << endl;
             	    // set the tail to the previous link
@@ -112,13 +111,15 @@ void LinkedList<T>::deleteNode(int pos){
                     // set the previous node's next to null
                     prevNodePtr->next = NULL;
                     // and delete it.
-                    delete traversingNodePtr;
+					delete traversingNodePtr;
+					return;
                 }else{ // if our matched value is in the middle of the list
 					cout << "-----DELETING the node with address: " << traversingNodePtr << endl;
                     // set our previous node to point to the next next node
                     prevNodePtr->next = traversingNodePtr->next;
-                    // and delete it.
-                    delete traversingNodePtr;
+					// and delete it.
+					delete traversingNodePtr;
+					return;
                 }
 			}
 			
