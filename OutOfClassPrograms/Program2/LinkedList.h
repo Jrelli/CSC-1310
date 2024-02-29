@@ -1,7 +1,8 @@
 /*
 	Title:      LinkedList.h
 	Author:     Joey Borrelli
-	Date:       2/18/2024
+	Date:       2/18-29/Anno Domini 2024
+    Per Ipsum, et cum Ipso, et in Ipso, est tibi Deo Patri omnipotenti, in unitate Spiritus Sancti, omnis honor et gloria per omnia saecula saeculorum.
 */
 
 #ifndef LINKED_LIST_H
