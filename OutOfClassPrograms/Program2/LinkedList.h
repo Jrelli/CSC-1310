@@ -11,8 +11,7 @@
 #include "Destination.h"
 #include <iostream>
 
-template <typename obj>
-class LinkedList{
+template <typename obj> class LinkedList{
     private:
         // structure of our nodes
         struct ListNode{
@@ -33,7 +32,7 @@ class LinkedList{
 };
 
 // initialize head, tail, & numNodes
-template <typename obj>
+template <typename obj> 
 LinkedList<obj>::LinkedList(){
     head = nullptr;
     tail = nullptr;
@@ -41,7 +40,7 @@ LinkedList<obj>::LinkedList(){
 }
 
 // deletes all nodes in the list
-template <typename obj>
+template <typename obj> 
 LinkedList<obj>::~LinkedList(){
     while(head){ // while our first value isn't null (which would mean the list is empty)
         // create a node to delete that is our first value
@@ -54,19 +53,17 @@ LinkedList<obj>::~LinkedList(){
 }
 
 // return the number of nodes currently in the linked list
-template <typename obj>
+template <typename obj> 
 int LinkedList<obj>::getLength(){
     return numNodes;
 }
 
 // accepts an integer indicating the position in the linked list and will return the value in the node at that position 
-template <typename obj>
+template <typename obj> 
 obj LinkedList<obj>::getNodeValue(int desiredPos){
     if(desiredPos > numNodes){
         std::cout << "ERROR: Position does not exist. There are only " << numNodes << " nodes.\n";
-        return;
     }else{
-        /* NOTE: MAY NEED TO CHANGE TO ONE DEPENDING ON HOW INPUT IS DONE RETURN TO THIS!!! */
         int currentNodePos = 0; // holds our current position 
         ListNode* traversingNodePointer = head; // Node that we are going to use to increment through the linked list and find our value.
 
@@ -78,10 +75,11 @@ obj LinkedList<obj>::getNodeValue(int desiredPos){
             traversingNodePointer = traversingNodePointer->next; // sets our TNP to the next node in the linked list.
         }
     }
+    return(NULL); // need this because the compiler thinks this will run and not return.
 }
 
 // This function inserts a new node into the linked list in alphabetical order according to its value.
-template <typename obj>
+template <typename obj> 
 void LinkedList<obj>::insertNode(Destination* nodeVal){
     // Dynamically allocate a new node with the value sent to this function.
     ListNode* newNode = new ListNode();
@@ -91,10 +89,12 @@ void LinkedList<obj>::insertNode(Destination* nodeVal){
     if(!head){
         head = newNode;
         tail = newNode;
+        numNodes++;
         return;
     }else if(newNode->value >= tail->value){ // If the Destination name alphabetically goes after tail’s destination name, then insert this new node at the end of the linked list.
         tail->next = newNode;
         tail = newNode;
+        numNodes++;
         return;
     }else{ // Otherwise, you will traverse through the linked list to find the appropriate spot to insert the node so that the name is alphabetically in order.*/
         // create a nodePtr to use to traverse the list.
@@ -105,6 +105,7 @@ void LinkedList<obj>::insertNode(Destination* nodeVal){
             if(newNode->value < traversingNodePointer->value){ // if our newNode's value should go before our traversing node.
                 prevNodePointer->next = newNode; // set the previous node's next to the new node 
                 newNode->next = traversingNodePointer; // the the new nodes next to the traversing node.
+                numNodes++;
                 return;
             }
             prevNodePointer = traversingNodePointer; // set our previous node to the current traversing Node

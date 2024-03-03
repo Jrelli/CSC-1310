@@ -1,14 +1,17 @@
 /*
 	Title:      TravelAgent.cpp
 	Author:     Joey Borrelli
-	Date:       2/29/Anno Domini 2024
+	Date:       2-3/29-1/Anno Domini 2024
     Per Ipsum, et cum Ipso, et in Ipso, est tibi Deo Patri omnipotenti, in unitate Spiritus Sancti, omnis honor et gloria per omnia saecula saeculorum.
 */
 
 #include "LinkedList.h"
 #include <fstream>
 #include <limits>
-//#include <random>
+#include <cstdlib>
+#include <ctime>
+
+void printGavin();
 
 int main(){
     LinkedList<Destination*> myLinkedList;
@@ -45,11 +48,16 @@ int main(){
                     break;
                 case 4: // Danger
                     tempDanger = std::stoi(tempString);
-                    break;
-                default: // 
-                    Destination* myDestination = new Destination(tempName, tempDesc, tempCost, tempDanger); // create object
-                    myLinkedList.insertNode(myDestination); // place the new Destination into the linked list.
+                    
+                    { // Compiler was throwing a error: jump to case label, and these brackets fix it apparently.
+                        Destination* myDestination = new Destination(tempName, tempDesc, tempCost, tempDanger); // create object
+                        myLinkedList.insertNode(myDestination); // place the new Destination into the linked list.
+                    }
+
                     i = 0; // reset i val
+                    break;
+                default: 
+                    std::cout << "dawg its broken";
                     break;
             }
         }
@@ -65,9 +73,9 @@ int main(){
     and the function should return the value (which is a pointer to the Destination).  
     Then, you can print out the Destination.*/
     for(int i = 0; i < myLinkedList.getLength(); i++){
-        std::cout << "**********DESTINATION #" << i+1 << "s**********";
-        std::cout << myLinkedList.getNodeValue(i);
-        std::cout << endl;
+        std::cout << "**********DESTINATION #" << i+1 << "**********\n";
+        std::cout << *myLinkedList.getNodeValue(i);
+        std::cout << std::endl;
     }
 
     /* Now you will ask the user four questions.  
@@ -104,7 +112,7 @@ int main(){
     std::cout << "          3. Do you like the taste of fruity pebbles cereal? (y or n)? ";
     std::cin >> likesFP;
     // Input validation
-    while(!cin){
+    while((likesFP != 'y') && (likesFP != 'n')){
         std::cin.clear(); // removes all error flags on the stream
         std::cin.ignore(numeric_limits<streamsize>::max(),'\n'); // removes all leftover characters or numbers from keyboard buffer to start with fresh input.   
         std::cout << "Oops!  You entered something wonky.  Please enter the letter y or n.\n";
@@ -115,7 +123,7 @@ int main(){
     std::cout << "          4. Is planet Earth flat? (y or n)? ";
     std::cin >> thinksEF;
     // Input validation
-    while(!cin){
+    while((thinksEF != 'y') && (thinksEF != 'n')){
         std::cin.clear(); // removes all error flags on the stream
         std::cin.ignore(numeric_limits<streamsize>::max(),'\n'); // removes all leftover characters or numbers from keyboard buffer to start with fresh input.   
         std::cout << "Oops!  You entered something wonky.  Please enter the letter y or n.\n";
@@ -124,7 +132,7 @@ int main(){
     }
 
     /* Print out user's answers*/
-    std::cout << name << ", based on your salary ($" << grossAnnualIncome << ") and the fact that you";
+    std::cout << std::endl << std::endl << name << ", based on your salary ($" << grossAnnualIncome << ") and the fact that you";
     if(likesFP != 'y'){
         std::cout << " don't";
     }
@@ -132,15 +140,16 @@ int main(){
     if(thinksEF != 'y'){
         std::cout << " don't";
     }
-    std::cout << " think that Earth is flat, you are going to travel to the following Destination!\n";
-
+    std::cout << " think that Earth is flat, you are going to travel to the following Destination!\n\n\n";
 
     /* Now, generate a random number between 0 and the number of nodes in the linked list (subtracting 1).  
     You will then call the getNodeValue Linked List function to get the value of the node at this position number.  
     Sample output is below.*/
+    srand(time(0));
+
     int randomNumber = rand() % myLinkedList.getLength(); // generate random number
 
-    std::cout << myLinkedList.getNodeValue(randomNumber); // print out destination
+    std::cout << *myLinkedList.getNodeValue(randomNumber); // print out destination
 
     /* Last, print “HAVE FUN!!”*/
     std::cout << "\nHAVE FUN!!";
@@ -193,5 +202,5 @@ void printGavin(){
     std::cout << ",,,,,,,,,,,,,@@@@@@####################@@@@################################################@@@@@@@@@@@@@,,,,,,,,,,,,,,,,*@@@,,,,,,,,,,,,,,,,,,,,,,,,,,\n";
     std::cout << ",,,,,,,,,,,@@@@@@@#########################@@@##########################################@@@@@@@@@@@@@@@@@@,,,,,,,,,,,,,,,,,@@@,,,,,,,,,,,,,,,,,,,,,,,,\n";
     std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
-    std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+    std::cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n\n";
 }
