@@ -131,7 +131,7 @@ int main(){
         std::cin >> thinksEF;
     }
 
-    /* Print out user's answers*/
+    // Print out user's answers
     std::cout << std::endl << std::endl << name << ", based on your salary ($" << grossAnnualIncome << ") and the fact that you";
     if(likesFP != 'y'){
         std::cout << " don't";
