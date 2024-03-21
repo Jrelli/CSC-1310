@@ -56,6 +56,8 @@ void HashTable::putValue(int key, Costume* newCostume){
 
     // create an index for the bucket
     int bucketIDX = newHashEntry->getKey() % tableSize;
+
+    std::cout << "BUCKET " << bucketIDX << "\n";
     
     if(!hashArray[bucketIDX]){ // if there is not a collision
         hashArray[bucketIDX] = newHashEntry;
@@ -80,10 +82,10 @@ void HashTable::printHashTable(){
         if(hashArray[i]){ // if hash array exists at IDX i
             HashEntry* entry = hashArray[i]; // create a pointer to this hash entry
             while(entry->getNext()){ // if there is another entry chained
-                std::cout << "---->" << std::setw(8) << entry->getValue();
+                std::cout << "---->" << std::setw(8) << *entry->getValue();
                 entry = entry->getNext(); // set entry to its next.
             }
-            std::cout << "---->" << std::setw(8) << entry->getValue();
+            std::cout << "---->" << std::setw(8) << *entry->getValue();
             std::cout << "\n";
         }else{ // if the bucket is empty
             std::cout << std::setw(8) << "NULL\n";
