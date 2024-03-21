@@ -39,9 +39,9 @@ class Queue{
 
 Queue::Queue(){
     // init all zero/null
-    head = nullptr;
-    tail = nullptr;
-    numNodes = 0;
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->numNodes = 0;
 }
 
 Queue::~Queue(){
