@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include "HashTable.h"
-// #include "Costume.h"
 using namespace std;
 
 int main(){
