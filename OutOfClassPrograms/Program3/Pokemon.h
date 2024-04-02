@@ -12,32 +12,53 @@
 
 class Pokemon{
     private:
-        int pokedexID;
+        int pokemonIndexNum;
         std::string pokemonName;
         
     public:
         Pokemon();
-        void setID();
-        void setName();
+        void setID(int);
+        void setName(std::string);
         int getID();
         std::string getName();
 
-        // // Overloading the + operator
-        // bool operator==(const Pokemon& other) const {
-        //     return();
-        // }
+        // Overloading the << operator
+        friend std::ostream& operator <<(std::ostream& os, const Pokemon& obj){
+            os << obj.pokemonName;
+            return os;
+        }
 
         // // Overloading the << operator to allow printing of objects of Pokemon
-        // friend std::ostream& operator<<(std::ostream& out, const Pokemon& num) {
-        //     out << num.value;
-        //     return out;
-        // }
+        bool operator ==(const Pokemon& obj){
+            return(this->pokemonIndexNum == obj.pokemonIndexNum);
+        }
+
+        // Overloading the < operator
+        bool operator <(const Pokemon& obj){
+            return(this->pokemonIndexNum < obj.pokemonIndexNum);
+        }
 
 };
 
 Pokemon::Pokemon(){
-    this->pokedexID = 0;
+    this->pokemonIndexNum = 0;
     this->pokemonName = "None";
+}
+
+void Pokemon::setID(int num){
+    this->pokemonIndexNum = num;
+}
+
+void Pokemon::setName(std::string name){
+    this->pokemonName = name;
+}
+
+int Pokemon::getID(){
+    return(pokemonIndexNum);
+}
+
+std::string Pokemon::getName(){
+    return(pokemonName);
 }
 
 #endif
