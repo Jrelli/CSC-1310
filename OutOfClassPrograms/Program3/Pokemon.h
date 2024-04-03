@@ -28,7 +28,7 @@ class Pokemon{
             return os;
         }
 
-        // // Overloading the << operator to allow printing of objects of Pokemon
+        // Overloading the << operator to allow printing of objects of Pokemon
         bool operator ==(const Pokemon& obj){
             return(this->pokemonIndexNum == obj.pokemonIndexNum);
         }

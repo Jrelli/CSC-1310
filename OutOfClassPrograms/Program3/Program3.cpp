@@ -38,16 +38,16 @@ int main(){
 					break;
 				case 1:
 					{
-						Pokemon* newPokemon = new Pokemon();
-						newPokemon->setID(tempPokemonIDX);
-						newPokemon->setName(tempString);
+						Pokemon newPokemon;
+						newPokemon.setID(tempPokemonIDX);
+						newPokemon.setName(tempString);
 						i = -1; // reset i
 
 						// If this object is not yet in the Binary Search Tree, then insert it in the tree. 
 						if(pokemonBinaryTree->searchNode(newPokemon)){
-							std::cout << "Oops! The Pokemon with index " << newPokemon->getID() << " is already in the Pokedex.\n";
+							std::cout << "Oops! The Pokemon with index " << newPokemon.getID() << " is already in the Pokedex.\n";
 						}else{
-							std::cout << "Inserting Pokemon with index " << newPokemon->getID() << " into the Pokedex.\n";
+							std::cout << "Inserting Pokemon with index " << newPokemon.getID() << " into the Pokedex.\n";
 							pokemonBinaryTree->insertNode(newPokemon);
 							numNodes++;
 						}
@@ -65,8 +65,6 @@ int main(){
 		std::cout << "\n********************POKEDEX:********************\n\n";
 		// Display all the Pokemon from the Binary Search Tree in order by the index.
 		pokemonBinaryTree->displayInOrder();
-
-
 	}
 	return 0;
 }

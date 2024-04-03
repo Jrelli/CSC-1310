@@ -60,9 +60,9 @@ class BinaryTree{
     public:
         BinaryTree();
         ~BinaryTree();
-        void insertNode(obj*);
+        void insertNode(obj);
         void displayInOrder();
-        bool searchNode(obj*);
+        bool searchNode(obj);
 };
 
 template <typename obj>
@@ -76,8 +76,8 @@ BinaryTree<obj>::~BinaryTree(){
 }
 
 template <typename obj>
-void BinaryTree<obj>::insertNode(obj* value){
-    TreeNode* newNode = new TreeNode(*value);
+void BinaryTree<obj>::insertNode(obj value){
+    TreeNode* newNode = new TreeNode(value);
 
     this->insert(root, newNode);
 }
@@ -89,13 +89,13 @@ void BinaryTree<obj>::displayInOrder(){
 }
 
 template <typename obj>
-bool BinaryTree<obj>::searchNode(obj* value){
+bool BinaryTree<obj>::searchNode(obj value){
     TreeNode* nodePtr = root;
 
     while (nodePtr){
-        if(nodePtr->value == *value){
+        if(nodePtr->value == value){
             return true;
-        }else if(*value < nodePtr->value){
+        }else if(value < nodePtr->value){
             nodePtr = nodePtr->left;
         }else{
             nodePtr = nodePtr->right;
