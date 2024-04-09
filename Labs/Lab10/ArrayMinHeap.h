@@ -103,7 +103,7 @@ int ArrayMinHeap::getNumberOfNodes(){
 }
 
 int ArrayMinHeap::getHeight(){
-    return(log(heapSize + 1) / log(2.0)); // return ceiling of this?
+    return(ceil(log2(heapSize + 1)));
 }
 
 void ArrayMinHeap::display(){
