@@ -1,36 +1,36 @@
 #include "Creature.h"
-#include "CreatureBinaryTree.h"
+#include "ArrayMinHeap.h"
 #include <cctype>
 #include <iostream>
 #include <fstream>
-using namespace std;
 
-void enterMagicalCreature(CreatureBinaryTree*);
-void enterMagicalCreatureFromFile(CreatureBinaryTree*);
-void deleteCreature(CreatureBinaryTree*);
-void printCreatures(CreatureBinaryTree*);
-void saveCreaturesToFile(CreatureBinaryTree*);
+void enterMagicalCreature(ArrayMinHeap*);
+void enterMagicalCreatureFromFile(ArrayMinHeap*);
+void deleteCreature(ArrayMinHeap*);
+void printCreatures(ArrayMinHeap*);
+void saveCreaturesToFile(ArrayMinHeap*);
 
 int main()
 {
 	int choice;
 	char response;
 	
-	CreatureBinaryTree creatureTree;
+	ArrayMinHeap creatureHeap = ArrayMinHeap(100);
 		
 	do{
 	
 		cout << "\n\nWhat would you like to do?\n";
 		cout << "\t1.  Enter Magical Creature\n";
 		cout << "\t2.  List/Print Creatures.\n";
-		cout << "\t3.  End Program.\n";
-		cout << "\tEnter 1, 2, or 3.\n";
+		cout << "\t3.  Remove Next Creature.\n";
+		cout << "\t4.  End Program.\n";
+		cout << "\tEnter 1, 2, 3, or 4.\n";
 		cout << "CHOICE:  ";
 		cin >> choice;
 		
-		while(choice < 1 || choice > 3)
+		while(choice < 1 || choice > 4)
 		{
-			cout << "\nYour choice was invalid.  Choose a number 1 through 3.\n";
+			cout << "\nYour choice was invalid.  Choose a number 1 through 4.\n";
 			cout << "CHOICE: ";
 			cin >> choice;
 		}
@@ -53,18 +53,22 @@ int main()
 						cin >> enterChoice;
 					}
 					if(enterChoice == 1)
-						enterMagicalCreature(&creatureTree);	
+						enterMagicalCreature(&creatureHeap);	
 					else
-						enterMagicalCreatureFromFile(&creatureTree);
+						enterMagicalCreatureFromFile(&creatureHeap);
 					break;
 					
-			case 2: printCreatures(&creatureTree);
+			case 2: printCreatures(&creatureHeap);
 					break;
 					
-			case 3: cout << "\nWould you like to save your creature list to a file? (y or n)  ";
+			case 3:	
+					// remove next creature
+					// Remember that when you remove from the heap you always remove the root – which is the creature that comes first in the alphabet in this program.
+					break;		
+			case 4: cout << "\nWould you like to save your creature list to a file? (y or n)  ";
 					cin >> response;
 					if(tolower(response) == 'y')
-						saveCreaturesToFile(&creatureTree);
+						saveCreaturesToFile(&creatureHeap);
 					cout << "\n\nGOODBYE!\n";
 					
 		} //end of switch
@@ -74,7 +78,7 @@ int main()
 	return 0;
 } //end of main
 
-void enterMagicalCreature(CreatureBinaryTree *creatureTree)
+void enterMagicalCreature(ArrayMinHeap *creatureHeap)
 {
 	string name, desc;
 	float cost;
@@ -104,7 +108,7 @@ void enterMagicalCreature(CreatureBinaryTree *creatureTree)
 		Creature newCreature(name, desc, dangerous, cost); 
 		
 		//insert creature in the tree
-		creatureTree->insertNode(newCreature);
+		creatureHeap->insert(newCreature);
 
 		cout << "\n\nWant to add more creatures? (y or n)  ";
 		cin >> response;
@@ -112,7 +116,7 @@ void enterMagicalCreature(CreatureBinaryTree *creatureTree)
 	}while(tolower(response) == 'y');	
 }
 
-void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
+void enterMagicalCreatureFromFile(ArrayMinHeap *creatureHeap)
 {
 	ifstream inputFile;
 	char filename[100];
@@ -151,7 +155,7 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 			Creature newCreature(name, desc, dangerous, cost); 
 
 			//insert creature in the tree
-			creatureTree->insertNode(newCreature);
+			creatureHeap->insert(newCreature);
 			
 			numCreatures++;
 			//start reading next line with new creature.						
@@ -167,17 +171,17 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 	}
 }
 
-void printCreatures(CreatureBinaryTree *creatureTree)
+void printCreatures(ArrayMinHeap *creatureHeap)
 {
-	creatureTree->fullDisplayInOrder();
+	creatureHeap->display();
 }
 
-void saveCreaturesToFile(CreatureBinaryTree *creatureTree)
+void saveCreaturesToFile(ArrayMinHeap *creatureHeap)
 {
 	string filename;
 	Creature tempCreature;
 	
-	if(creatureTree->getNumNodes() == 0)
+	if(creatureHeap->getNumberOfNodes() == 0)
 	{
 		cout << "------------------------------------------------------------------------" << endl;
 		cout << "THERE ARE NO CREATURES AT YOUR ZOO!\n";
@@ -185,6 +189,6 @@ void saveCreaturesToFile(CreatureBinaryTree *creatureTree)
 	}
 	else
 	{
-		creatureTree->saveToFile();
+		creatureHeap->saveToFile();
 	}
 }
