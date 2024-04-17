@@ -8,7 +8,7 @@ template <typename T>
 class Stack
 {
 private:
-   // Structure for the stach nodes
+   // Structure for the stack nodes
    struct StackNode
    {
       T value;          // Value in the node

@@ -58,6 +58,7 @@ ArrayMinHeap::ArrayMinHeap(int capacity){
 /*TODO*/
 ArrayMinHeap::~ArrayMinHeap(){
     // releases heapArray memory
+    delete heapArray;
 }
 
 void ArrayMinHeap::minHeapify(int i){
