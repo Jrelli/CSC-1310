@@ -29,6 +29,7 @@ class GraphMatrix{
 GraphMatrix::GraphMatrix(int numVertices){
     this->numVertices = numVertices;
     // dynamically allocate vertexMatrix
+    //vertexMatrix = new int[numVertices][numVertices];
     // set all elements of the vertexMatrix to zero
 }
 

@@ -30,22 +30,40 @@ int main(){
     inputFile >> numVertices;
 
     // create matrix object and list object?
-    //adjacencyMatrix(numVertices);
-    //adjacencyList(numVertices);
+
+    GraphList myGraphList = GraphList(numVertices);
+    GraphMatrix myGraphMatrix = GraphMatrix(numVertices);
 
     /* Read each pair of vertices from the file that makes each edge and then add that edge to the matrix.  
     Then add that edge to the adjacency list as well. */
+    // Use a loop to read from the file the edges and add the edge to the adjacency list
+    int vert1, vert2;
+    while(inputFile >> vert1 >> vert2){ // while the fileIn can take in data for ints: vert1 and vert2
+        myGraphList.addEdge(vert1, vert2);
+        myGraphMatrix.addEdge(vert1, vert2);
+    }
 
     // Print the adjacency matrix. 
-    //adjacencyMatrix.printMatrix();
+    myGraphMatrix.printGraph();
         
     // Print the adjacency list.
-    //adjacencyList.printList();
+    myGraphList.printGraph();
         
-    /* Create a stack object to use in the DFS algorithm.  
-    You may also want to dynamically create a Boolean array (I called mine visited) which is the size of the number of vertices to keep track of which vertices have been visited.
-    Use the stack to implement the Depth-First-Search algorithm.  Your solution may either be recursive, or not.
-    Print out the vertex when you push it to the stack (meaning it has been visited).*/
+    /* Create a stack object to use in the DFS algorithm. */ 
+    //Stack myStackObj = Stack<>();
+    
+    /* You may also want to dynamically create a Boolean array 
+    (I called mine visited) which is the size of the number of 
+    vertices to keep track of which vertices have been visited. */
+    bool* visited = new bool;
+
+    /* Use the stack to implement the Depth-First-Search algorithm.  
+    Your solution may either be recursive, or not. */
+
+    
+    /* Print out the vertex when you push it to the stack (meaning 
+    it has been visited).*/
+    
   
     return 0;
 }

@@ -13,7 +13,6 @@ class GraphList{
         struct ListNode{
             int value;
             ListNode* next;
-            /*CHECK*/
             ListNode(int value){
                 this->value = value;
                 this->next = nullptr;
@@ -29,26 +28,56 @@ class GraphList{
         void printGraph();
 };
 
-/*TODO*/
 GraphList::GraphList(int numVertices){
-    this->numVertices = numVertices;
-    // dynamically allocate an array of pointers to ListNodes
+    this->numVertices = numVertices; // set num of vertices to zero
+	this->numEdges = 0; // init number of edges as zero
+	this->headArray = new ListNode*[this->numVertices]; // make Array of Vertices the length of how many verts we have 
+	for(int i = 0; i < this->numVertices; i++){ // loop through array of vertices
+		this->headArray[i] = nullptr; // set vertices to null
+	}
 }
 
-/*TODO*/
 GraphList::~GraphList(){
-    // deletes linked lists
+    for(int i = 0; i < this->numVertices; i++){ // loop through array of vertices
+		ListNode* traversingVert = headArray[i]; 
+		while(traversingVert){ // while the linked list isn't empty/null
+			ListNode* vertToDelete = traversingVert;
+			traversingVert = traversingVert->next;
+			delete vertToDelete;
+		}
+	}
 }
 
-/*TODO*/
 void GraphList::addEdge(int x, int y){
-    ListNode newNode(x);
-    // add node to linked list
+    // create new node
+	ListNode* newNode = new ListNode(y);
+
+	ListNode* tempNode = headArray[x];
+
+	if(!tempNode){ // if linked list is empty
+		headArray[x] = newNode; // insert
+	}else{ // if linked list is full
+		while(tempNode->next){ // loop through linked list
+			tempNode = tempNode->next;
+		}
+		tempNode->next = newNode; // insert at end
+	}
+
+	numEdges++; // increment numEdges
 }
 
-/*TODO*/
 void GraphList::printGraph(){
-
+    // print adjacency list
+	std::cout << "\nAdjacency List...\n";
+	for(int i = 0; i < numVertices; i++){ // loop through array
+		std::cout << i << "--->";
+		ListNode* traversingPointer = headArray[i]; // create a pointer to traverse through linked lists
+		while(traversingPointer){ // while the linked list isn't empty/null
+			std::cout << traversingPointer->value << "--->";
+			traversingPointer = traversingPointer->next; // traverse the pointer
+		}
+		std::cout << "NULL\n";
+	}
 }
 
 #endif
