@@ -8,6 +8,9 @@
 #ifndef GRAPH_LIST_H
 #define GRAPH_LIST_H
 
+using namespace std;
+#include <iostream>
+
 class GraphList{
     private:
         struct ListNode{
@@ -68,15 +71,15 @@ void GraphList::addEdge(int x, int y){
 
 void GraphList::printGraph(){
     // print adjacency list
-	std::cout << "\nAdjacency List...\n";
+	cout << "\nAdjacency List...\n";
 	for(int i = 0; i < numVertices; i++){ // loop through array
-		std::cout << i << "--->";
+		cout << i << "--->";
 		ListNode* traversingPointer = headArray[i]; // create a pointer to traverse through linked lists
 		while(traversingPointer){ // while the linked list isn't empty/null
-			std::cout << traversingPointer->value << "--->";
+			cout << traversingPointer->value << "--->";
 			traversingPointer = traversingPointer->next; // traverse the pointer
 		}
-		std::cout << "NULL\n";
+		cout << "NULL\n";
 	}
 }
 
