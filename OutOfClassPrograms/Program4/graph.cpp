@@ -72,6 +72,9 @@ int main(){
     DFS(0, visited, numVertices, myGraphMatrix, myStackObj);
 
     return 0;
+
+    // delete visited
+    delete[] visited;
 }
 
 void DFS(int current, bool*& visited, int numVertices, GraphMatrix& myGraphMatrix, Stack<int>& theStack){
